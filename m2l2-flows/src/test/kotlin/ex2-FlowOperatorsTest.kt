@@ -97,13 +97,14 @@ class FlowOperatorsTest {
         val timeInit = System.currentTimeMillis()
         var sleepIndex = 1 // Счетчик инкрементится в терминальном операторе после большой задержки
         var el = 1 // Простой номер сообщения
-        flow {
-            while (sleepIndex < 5) {
-                delay(500)
-                println("emitting $sleepIndex ${System.currentTimeMillis() - timeInit}ms")
-                emit(el++ to sleepIndex)
-            }
-        }
+//        flow {
+//            while (sleepIndex < 5) {
+//                delay(5)
+//                println("emitting $sleepIndex ${System.currentTimeMillis() - timeInit}ms")
+//                emit(el++ to sleepIndex)
+//            }
+//        }
+        flowOf(1, 2, 3, 4, 5)
             .onEach { println("Send to flow: $it ${System.currentTimeMillis() - timeInit}ms") }
             .buffer(3, BufferOverflow.DROP_LATEST) // Здесь включаем буфер размером 3 элемента
 //            .buffer(3, BufferOverflow.DROP_OLDEST) // Попробуйте разные варианты типов и размеров буферов
