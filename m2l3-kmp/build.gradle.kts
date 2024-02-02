@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    // Только для lombock!!
     java
 }
 
@@ -84,6 +85,7 @@ kotlin {
     }
 }
 
+// Только для lombock!!
 dependencies {
     compileOnly("org.projectlombok:lombok:1.18.20")
     annotationProcessor("org.projectlombok:lombok:1.18.20")

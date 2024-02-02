@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.otus.otuskotlin.kmp.kt2java.InteroperabilityJava;
 import ru.otus.otuskotlin.kmp.kt2java.MyClass;
+import ru.otus.otuskotlin.kmp.kt2java.UtilKt;
 import ru.otus.otuskotlin.kmp.kt2java.Utils;
 
 import java.io.SyncFailedException;
@@ -56,6 +57,7 @@ public class Ex5InteroperabilityJavaTest {
     void globalFunctions() {
         Assertions.assertEquals("date", Utils.getDate());
         Assertions.assertEquals("name", Utils.getName());
+        UtilKt.getDate1();
     }
 
     @Test
@@ -65,7 +67,6 @@ public class Ex5InteroperabilityJavaTest {
         Assertions.assertEquals("a-prop", mc.a); // доступ только по backing field
         Assertions.assertEquals("b-prop", mc.getB()); // доступ только по геттеру
         Assertions.assertEquals("c-prop", mc.getC()); // доступ только по геттеру
-
 
         // Кастомные значения
         MyClass mcc = new MyClass("a-field", "b-field", "c-field");
