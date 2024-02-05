@@ -1,0 +1,15 @@
+language = "C"
+braces = "SameLine"
+style = "tag"
+include_guard = "RS_EXAMPLE_LIB_H"
+
+[parse]
+parse_deps = true
+include = [
+    "src/lib.rs", 
+]
+
+exclude = [
+    "libc",
+]
+clean = true
