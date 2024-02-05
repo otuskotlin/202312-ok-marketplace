@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
-
 plugins {
     kotlin("multiplatform")
 }
@@ -36,8 +34,6 @@ kotlin {
                 cinterops {
                     // настраиваем cinterop в файле src/nativeInterop/cinterop/libcurl.def
                     val libcurl by creating
-                    // настраиваем cinterop в файле src/nativeInterop/cinterop/rs_example.def
-                    create("rs_example")
                 }
             }
             binaries {
@@ -85,13 +81,5 @@ kotlin {
         nativeTest {
         }
 
-    }
-}
-
-tasks {
-    withType(KotlinNativeTest::class) {
-        val pathToLib: String = project.layout.projectDirectory.dir("rs-example/target/debug").toString()
-        println("PATH TO LIB: $pathToLib")
-        environment("LD_LIBRARY_PATH", pathToLib)
     }
 }

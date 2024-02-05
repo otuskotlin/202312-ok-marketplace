@@ -1,6 +1,5 @@
 @file:OptIn(ExperimentalForeignApi::class)
-import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.toKString
+import kotlinx.cinterop.*
 import libcurl.*
 
 @OptIn(ExperimentalForeignApi::class)
