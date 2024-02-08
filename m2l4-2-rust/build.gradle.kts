@@ -11,7 +11,7 @@ repositories {
 kotlin {
     listOf(
         linuxX64(),
-        macosArm64(),
+//        macosArm64(),
     ).forEach {
         it.apply {
             compilations.getByName("main") {
