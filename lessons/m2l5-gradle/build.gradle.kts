@@ -1,6 +1,4 @@
-import org.gradle.internal.jvm.Jvm
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
-import java.io.ByteArrayOutputStream
 
 plugins {
     kotlin("jvm")
@@ -46,3 +44,22 @@ tasks {
         dependsOn(myCopyTask)
     }
 }
+
+tasks {
+    create("myTask") {
+        println("Configuration stage")
+        doFirst { println("At task starts") }
+        doLast { println("At task ends") }
+    }
+}
+
+afterEvaluate {
+    tasks {
+        create("myOtherTask") {
+            println("After other tasks initialized")
+        }
+
+        forEach { println("TASK $it") }
+    }
+}
+
