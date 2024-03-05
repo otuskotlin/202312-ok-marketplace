@@ -15,14 +15,14 @@ Marketplace -- это площадка, на которой пользовате
 ## Документация
 
 1. Маркетинг и аналитика
-   1. [Целевая аудитория](./docs/01-biz/01-target-audience.md)
-   2. [Заинтересанты](./docs/01-biz/02-stakeholders.md)
-   3. [Пользовательские истории](./docs/01-biz/03-bizreq.md)
+    1. [Целевая аудитория](./docs/01-biz/01-target-audience.md)
+    2. [Заинтересанты](./docs/01-biz/02-stakeholders.md)
+    3. [Пользовательские истории](./docs/01-biz/03-bizreq.md)
 2. Аналитика:
-   1. [Функциональные требования](./docs/02-analysis/01-functional-requiremens.md)
-   2. [Нефункциональные требования](./docs/02-analysis/02-nonfunctional-requirements.md)
+    1. [Функциональные требования](./docs/02-analysis/01-functional-requiremens.md)
+    2. [Нефункциональные требования](./docs/02-analysis/02-nonfunctional-requirements.md)
 3. DevOps
-   1. [Файлы сборки](./deploy)
+    1. [Файлы сборки](./deploy)
 4. Архитектура
 5. Тесты
 
@@ -31,17 +31,28 @@ Marketplace -- это площадка, на которой пользовате
 ## Подпроекты для занятий по языку Kotlin
 
 1. Модуль 1: Введение в Kotlin
-   1. [m1l1-first](lessons/m1l1-first) - Вводное занятие, создание первой программы на Kotlin
-   2. [m1l2-basic](lessons/m1l2-basic) - Основные конструкции Kotlin
-   3. [m1l3-func](lessons/m1l3-func) - Функциональные элементы Kotlin
-   4. [m1l4-oop](lessons/m1l4-oop) - Объектно-ориентированное программирование
-   5. [m1l5-dsl](lessons/m1l5-dsl) - Предметно ориентированные языки (DSL)
+    1. [m1l1-first](lessons/m1l1-first) - Вводное занятие, создание первой программы на Kotlin
+    2. [m1l2-basic](lessons/m1l2-basic) - Основные конструкции Kotlin
+    3. [m1l3-func](lessons/m1l3-func) - Функциональные элементы Kotlin
+    4. [m1l4-oop](lessons/m1l4-oop) - Объектно-ориентированное программирование
+    5. [m1l5-dsl](lessons/m1l5-dsl) - Предметно ориентированные языки (DSL)
 2. Модуль 2: Расширенные возможности Kotlin
-   1. [m2l1-coroutines](lessons/m2l1-coroutines) - Асинхронное и многопоточное программирование с корутинами
-   2. [m2l2-flows](lessons/m2l2-flows) - Асинхронное и многопоточное программирование с Flow
-   3. [m2l3-kmp](lessons/m2l3-kmp) - Kotlin Multiplatform
-   4. m2l4 - Интероперабельность Котлин с другими языками
-      1. [m2l4-1-interop](lessons/m2l4-1-interop) - Kotlin JS/Kotlin Native
-      2. [m2l4-2-rust](lessons/m2l4-2-rust) - Kotlin-Rust
-      3. [m2l4-3-jni](lessons/m2l4-3-jni) - Kotlin JVM - Native (JNI)
-   5. [m2l5-gradle](lessons/m2l5-gradle) - Расширенные возможности Gradle, Kotlin DSL
+    1. [m2l1-coroutines](lessons/m2l1-coroutines) - Асинхронное и многопоточное программирование с корутинами
+    2. [m2l2-flows](lessons/m2l2-flows) - Асинхронное и многопоточное программирование с Flow
+    3. [m2l3-kmp](lessons/m2l3-kmp) - Kotlin Multiplatform
+    4. m2l4 - Интероперабельность Котлин с другими языками
+        1. [m2l4-1-interop](lessons/m2l4-1-interop) - Kotlin JS/Kotlin Native
+        2. [m2l4-2-rust](lessons/m2l4-2-rust) - Kotlin-Rust
+        3. [m2l4-3-jni](lessons/m2l4-3-jni) - Kotlin JVM - Native (JNI)
+    5. [m2l5-gradle](lessons/m2l5-gradle) - Расширенные возможности Gradle, Kotlin DSL
+
+## Проектные модули
+
+### Транспортные модели, API
+
+1. [specs](specs) - описание API в форме OpenAPI-спецификаций
+2. [ok-marketplace-api-v1-jackson](ok-marketplace-be/ok-marketplace-api-v1-jackson) - Генерация первой версии
+   транспортных модеелй с Jackson
+3. [ok-marketplace-api-v2-kmp](ok-marketplace-be/ok-marketplace-api-v2-kmp) - Генерация второй версии транспортных
+   моделей с KMP
+
