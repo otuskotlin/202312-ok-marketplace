@@ -103,7 +103,7 @@ private fun AdCreateObject.toInternal(): MkplAd = MkplAd(
     description = this.description ?: "",
     adType = this.adType.fromTransport(),
     visibility = this.visibility.fromTransport(),
-    productId = this.productId.toProductId()
+    productId = this.productId.toProductId(),
 )
 
 private fun AdUpdateObject.toInternal(): MkplAd = MkplAd(
