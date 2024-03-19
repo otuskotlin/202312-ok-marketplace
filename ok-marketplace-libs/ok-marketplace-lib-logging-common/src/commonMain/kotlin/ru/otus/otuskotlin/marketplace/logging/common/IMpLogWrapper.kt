@@ -1,7 +1,6 @@
 package ru.otus.otuskotlin.marketplace.logging.common
 
 import kotlinx.datetime.Clock
-import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 @OptIn(ExperimentalStdlibApi::class)
@@ -43,7 +42,6 @@ interface IMpLogWrapper: AutoCloseable {
     /**
      * Функция обертка для выполнения прикладного кода с логированием перед выполнением и после
      */
-    @OptIn(ExperimentalTime::class)
     suspend fun <T> doWithLogging(
         id: String = "",
         level: LogLevel = LogLevel.INFO,

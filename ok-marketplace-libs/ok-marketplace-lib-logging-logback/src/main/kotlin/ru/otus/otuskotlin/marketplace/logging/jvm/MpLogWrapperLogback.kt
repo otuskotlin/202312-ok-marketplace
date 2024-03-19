@@ -24,7 +24,7 @@ class MpLogWrapperLogback(
     /**
      * Основная функция для логирования
      */
-    private fun log(
+    private fun logbackLog(
         msg: String = "",
         level: Level = Level.TRACE,
         marker: Marker = DefaultMarker("DEV"),
@@ -68,7 +68,7 @@ class MpLogWrapperLogback(
         e: Throwable?,
         data: Any?,
         objs: Map<String, Any>?,
-    ) = log(
+    ) = logbackLog(
         msg = msg,
         level = level.toSlf(),
         marker = DefaultMarker(marker),
