@@ -17,15 +17,9 @@ suspend inline fun <reified Q : IRequest, @Suppress("unused") reified R : IRespo
     logId: String,
 ) = appSettings.controllerHelper(
     {
-        println("from ${this@processV2.receiveText()}")
-        val req = this@processV2.receive<Q>()
-        fromTransport(req)
-        println("REQ: $req")
+        fromTransport(this@processV2.receive<Q>())
     },
-    {
-        println(" TO TRANSPORT")
-        this@processV2.respond(toTransportAd())
-    },
+    { this@processV2.respond(toTransportAd()) },
     clazz,
     logId,
 )

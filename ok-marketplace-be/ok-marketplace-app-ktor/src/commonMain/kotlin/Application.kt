@@ -5,7 +5,6 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
-import io.ktor.server.plugins.doublereceive.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2Mapper
@@ -29,7 +28,6 @@ fun Application.module(
         */
         anyHost()
     }
-    install(DoubleReceive)
 
     routing {
         get("/") {
