@@ -9,7 +9,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2Mapper
 import ru.otus.otuskotlin.marketplace.app.ktor.v2.v2Ad
-import ru.otus.otuskotlin.marketplace.app.plugins.initAppSettings
+import ru.otus.otuskotlin.marketplace.app.ktor.plugins.initAppSettings
 
 fun Application.module(
     appSettings: MkplAppSettings = initAppSettings()

@@ -9,7 +9,7 @@ plugins {
     id("build-kmp")
 //    id("io.ktor.plugin")
     alias(libs.plugins.ktor)
-//    id("com.bmuschko.docker-remote-api")
+//    id("com.bmuschko.docker-remote-api") - Универсальный плагин для докера
     alias(libs.plugins.muschko.remote)
 }
 
@@ -27,10 +27,12 @@ ktor {
 }
 
 jib {
-    container.mainClass = "io.ktor.server.cio.EngineMain"
+    container.mainClass = application.mainClass.get()
 }
 
 kotlin {
+    // !!! Обязательно. Иначе не проходит сборка толстых джанриков в shadowJar
+    jvm { withJava() }
     targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
         binaries {
             executable {

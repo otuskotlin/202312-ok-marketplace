@@ -1,8 +1,7 @@
-package ru.otus.otuskotlin.marketplace.app.plugins
+package ru.otus.otuskotlin.marketplace.app.ktor.plugins
 
 import io.ktor.server.application.*
 import ru.otus.otuskotlin.marketplace.app.ktor.MkplAppSettings
-import ru.otus.otuskotlin.marketplace.app.ktor.plugins.getLoggerProviderConf
 import ru.otus.otuskotlin.marketplace.biz.MkplAdProcessor
 import ru.otus.otuskotlin.marketplace.common.MkplCorSettings
 

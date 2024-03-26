@@ -146,5 +146,4 @@ class V2AdStubApiTest {
         }
         function(response)
     }
-
 }
