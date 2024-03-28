@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.socket.WebSocketHandler
 import org.springframework.web.reactive.socket.WebSocketSession
 import reactor.core.publisher.Mono
-import ru.otus.otuskotlin.markeplace.app.spring.config.MkplAppSettings
-import ru.otus.otuskotlin.markeplace.app.spring.models.SpringWsSessionV1
+import ru.otus.otuskotlin.markeplace.app.spring.base.MkplAppSettings
+import ru.otus.otuskotlin.markeplace.app.spring.base.SpringWsSessionV1
 import ru.otus.otuskotlin.marketplace.api.v1.apiV1Mapper
 import ru.otus.otuskotlin.marketplace.api.v1.models.IRequest
 import ru.otus.otuskotlin.marketplace.app.common.controllerHelper
@@ -30,11 +30,13 @@ class AdControllerV1Ws(private val appSettings: MkplAppSettings) : WebSocketHand
         sessions.add(mkplSess)
         val messageObj = process("ws-v1-init") {
             command = MkplCommand.INIT
+            wsSession = mkplSess
         }
 
         val messages = session.receive().asFlow()
             .map { message ->
                 process("ws-v1-handle") {
+                    wsSession = mkplSess
                     val request = apiV1Mapper.readValue(message.payloadAsText, IRequest::class.java)
                     fromTransport(request)
                 }
@@ -42,7 +44,9 @@ class AdControllerV1Ws(private val appSettings: MkplAppSettings) : WebSocketHand
 
         val output = merge(flowOf(messageObj), messages)
             .onCompletion {
+                sessions.remove(mkplSess)
                 process("ws-v1-finish") {
+                    wsSession = mkplSess
                     command = MkplCommand.FINISH
                 }
             }

@@ -9,6 +9,7 @@ import ru.otus.otuskotlin.markeplace.app.spring.controllers.AdControllerV1Ws
 import ru.otus.otuskotlin.markeplace.app.spring.controllers.AdControllerV2Ws
 
 
+@Suppress("unused")
 @Configuration
 class WebSocketConfig(
     private val adControllerV1: AdControllerV1Ws,

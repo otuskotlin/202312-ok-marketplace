@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.socket.WebSocketHandler
 import org.springframework.web.reactive.socket.WebSocketSession
 import reactor.core.publisher.Mono
-import ru.otus.otuskotlin.markeplace.app.spring.config.MkplAppSettings
-import ru.otus.otuskotlin.markeplace.app.spring.models.SpringWsSessionV1
+import ru.otus.otuskotlin.markeplace.app.spring.base.MkplAppSettings
+import ru.otus.otuskotlin.markeplace.app.spring.base.SpringWsSessionV2
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2RequestDeserialize
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2ResponseSerialize
 import ru.otus.otuskotlin.marketplace.api.v2.mappers.fromTransport
@@ -27,15 +27,17 @@ class AdControllerV2Ws(private val appSettings: MkplAppSettings) : WebSocketHand
     private val sessions = appSettings.corSettings.wsSessions
 
     override fun handle(session: WebSocketSession): Mono<Void> = runBlocking {
-        val mkplSess = SpringWsSessionV1(session)
+        val mkplSess = SpringWsSessionV2(session)
         sessions.add(mkplSess)
-        val messageObj = process("ws-v1-init") {
+        val messageObj = process("ws-v2-init") {
             command = MkplCommand.INIT
+            wsSession = mkplSess
         }
 
         val messages = session.receive().asFlow()
             .map { message ->
-                process("ws-v1-handle") {
+                process("ws-v2-handle") {
+                    wsSession = mkplSess
                     val request = apiV2RequestDeserialize<IRequest>(message.payloadAsText)
                     fromTransport(request)
                 }
@@ -43,9 +45,11 @@ class AdControllerV2Ws(private val appSettings: MkplAppSettings) : WebSocketHand
 
         val output = merge(flowOf(messageObj), messages)
             .onCompletion {
-                process("ws-v1-finish") {
+                process("ws-v2-finish") {
                     command = MkplCommand.FINISH
+                    wsSession = mkplSess
                 }
+                sessions.remove(mkplSess)
             }
             .map { session.textMessage(apiV2ResponseSerialize(it)) }
             .asFlux()
