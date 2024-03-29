@@ -59,7 +59,7 @@ class AdControllerV1Ws(private val appSettings: MkplAppSettings) : WebSocketHand
                 }
             }
 
-        val output = merge(flowOf(messageObj), messages)
+        val output = merge(flowOf(messageObj), messages, mkplSess.output)
             .onCompletion {
                 process("ws-v1-finish") {
                     wsSession = mkplSess
