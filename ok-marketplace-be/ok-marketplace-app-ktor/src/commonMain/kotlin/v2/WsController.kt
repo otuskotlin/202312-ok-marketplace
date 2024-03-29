@@ -4,6 +4,7 @@ import io.ktor.websocket.*
 import kotlinx.coroutines.channels.ClosedReceiveChannelException
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.receiveAsFlow
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2RequestDeserialize
 import ru.otus.otuskotlin.marketplace.api.v2.apiV2ResponseSerialize
@@ -19,6 +20,7 @@ import kotlin.reflect.KClass
 
 private val clWsV2: KClass<*> = WebSocketSession::wsHandlerV2::class
 suspend fun WebSocketSession.wsHandlerV2(appSettings: MkplAppSettings) = with(KtorWsSessionV2(this)) {
+    // Обновление реестра сессий
     val sessions = appSettings.corSettings.wsSessions
     sessions.add(this)
 
@@ -34,39 +36,43 @@ suspend fun WebSocketSession.wsHandlerV2(appSettings: MkplAppSettings) = with(Kt
     )
 
     // Handle flow
-    incoming.receiveAsFlow().mapNotNull { it ->
-        val frame = it as? Frame.Text ?: return@mapNotNull
-        // Handle without flow destruction
-        try {
+    incoming.receiveAsFlow()
+        .mapNotNull { it ->
+            val frame = it as? Frame.Text ?: return@mapNotNull
+            // Handle without flow destruction
+            try {
+                appSettings.controllerHelper(
+                    {
+                        fromTransport(apiV2RequestDeserialize<IRequest>(frame.readText()))
+                        wsSession = this@with
+                    },
+                    {
+                        val result = apiV2ResponseSerialize(toTransportAd())
+                        // If change request, response is sent to everyone
+                        outgoing.send(Frame.Text(result))
+                    },
+                    clWsV2,
+                    "wsV2-handle"
+                )
+
+            } catch (_: ClosedReceiveChannelException) {
+                sessions.remove(this@with)
+            } catch (e: Throwable) {
+                println("FFF")
+            }
+        }
+        .onCompletion {
+            // Handle finish request
             appSettings.controllerHelper(
                 {
-                    fromTransport(apiV2RequestDeserialize<IRequest>(frame.readText()))
+                    command = MkplCommand.FINISH
                     wsSession = this@with
                 },
-                {
-                    val result = apiV2ResponseSerialize(toTransportAd())
-                    // If change request, response is sent to everyone
-                    outgoing.send(Frame.Text(result))
-                },
+                { },
                 clWsV2,
-                "wsV2-handle"
+                "wsV2-finish"
             )
-
-        } catch (_: ClosedReceiveChannelException) {
-            sessions.clearAll()
-        } catch (e: Throwable) {
-            println("FFF")
+            sessions.remove(this@with)
         }
-
-        // Handle finish request
-        appSettings.controllerHelper(
-            {
-                command = MkplCommand.FINISH
-                wsSession = this@with
-            },
-            { },
-            clWsV2,
-            "wsV2-finish"
-        )
-    }.collect()
+        .collect()
 }

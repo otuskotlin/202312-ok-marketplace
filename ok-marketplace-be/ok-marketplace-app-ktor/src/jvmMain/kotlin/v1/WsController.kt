@@ -34,7 +34,7 @@ suspend fun WebSocketSession.wsHandlerV1(appSettings: MkplAppSettings) = with(Kt
     )
 
     // Handle flow
-    incoming.receiveAsFlow().mapNotNull { it ->
+    incoming.receiveAsFlow().mapNotNull {
         val frame = it as? Frame.Text ?: return@mapNotNull
         // Handle without flow destruction
         try {
@@ -53,7 +53,7 @@ suspend fun WebSocketSession.wsHandlerV1(appSettings: MkplAppSettings) = with(Kt
             )
 
         } catch (_: ClosedReceiveChannelException) {
-            sessions.clearAll()
+            sessions.remove(this@with)
         } finally {
             // Handle finish request
             appSettings.controllerHelper(
@@ -65,6 +65,7 @@ suspend fun WebSocketSession.wsHandlerV1(appSettings: MkplAppSettings) = with(Kt
                 clWsV1,
                 "wsV1-finish"
             )
+            sessions.remove(this@with)
         }
     }.collect()
 }

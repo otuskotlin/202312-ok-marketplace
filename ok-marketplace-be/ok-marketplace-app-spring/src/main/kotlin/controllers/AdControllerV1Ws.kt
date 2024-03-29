@@ -26,6 +26,23 @@ class AdControllerV1Ws(private val appSettings: MkplAppSettings) : WebSocketHand
     private val sessions = appSettings.corSettings.wsSessions
 
     override fun handle(session: WebSocketSession): Mono<Void> = runBlocking {
+//        // Обслуживаем INIT логику
+//
+//        // Получаем поток входящих сообщений
+//        val input = session.receive()
+//        // Формируем поток исходящих сообщений
+//        val output1 = input
+//            .map {session.textMessage("Echo $it")}
+//            .doOnComplete {
+//                // Можно выполнить логику FINISH
+//            }
+//            .onErrorComplete {
+//                // Обработка ошибок
+//                true
+//            }
+//        return@runBlocking session.send(output1)
+
+
         val mkplSess = SpringWsSessionV1(session)
         sessions.add(mkplSess)
         val messageObj = process("ws-v1-init") {
@@ -44,11 +61,11 @@ class AdControllerV1Ws(private val appSettings: MkplAppSettings) : WebSocketHand
 
         val output = merge(flowOf(messageObj), messages)
             .onCompletion {
-                sessions.remove(mkplSess)
                 process("ws-v1-finish") {
                     wsSession = mkplSess
                     command = MkplCommand.FINISH
                 }
+                sessions.remove(mkplSess)
             }
             .map { session.textMessage(apiV1Mapper.writeValueAsString(it)) }
             .asFlux()
