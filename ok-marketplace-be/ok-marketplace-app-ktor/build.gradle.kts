@@ -56,7 +56,7 @@ kotlin {
 
 //                // Для того, чтоб получать содержимое запроса более одного раза
 //                В Application.main добавить `install(DoubleReceive)`
-                implementation("io.ktor:ktor-server-double-receive:${libs.versions.ktor.get()}")
+//                implementation("io.ktor:ktor-server-double-receive:${libs.versions.ktor.get()}")
 
                 implementation(project(":ok-marketplace-common"))
                 implementation(project(":ok-marketplace-app-common"))
