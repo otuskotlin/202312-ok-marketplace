@@ -60,6 +60,8 @@ class SimpleKafkaTest {
             put("enable.auto.commit", "true")
             put("auto.commit.interval.ms", "1000")
             put("session.timeout.ms", "30000")
+            // https://kafka.apache.org/documentation/#consumerconfigs_auto.offset.reset
+            put("auto.offset.reset", "earliest")
             put("key.deserializer","org.apache.kafka.common.serialization.StringDeserializer")
             put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
         }

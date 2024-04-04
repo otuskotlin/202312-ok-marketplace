@@ -49,7 +49,7 @@ class AppKafkaConsumer(
                     consumer.poll(Duration.ofSeconds(1))
                 }
                 if (!records.isEmpty)
-                    log.info("Receive ${records.count()} messages")
+                    log.debug("Receive ${records.count()} messages")
 
                 records.forEach { record: ConsumerRecord<String, String> ->
                     try {
