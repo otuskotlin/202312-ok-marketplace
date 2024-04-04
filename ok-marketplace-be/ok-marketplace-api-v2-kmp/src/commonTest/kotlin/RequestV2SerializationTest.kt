@@ -48,22 +48,4 @@ class RequestV2SerializationTest {
 
         assertEquals(null, obj.ad)
     }
-    @Test
-    fun deserializeNaked1() {
-        val jsonString = """
-            {
-  "ad": {
-    "title": "Болт",
-    "description": "КРУТЕЙШИЙ",
-    "visibility": "public",
-    "adType": "demand"
-  },
-  "debug": {
-    "mode": "stub", "stub":"success"
-  }
-}       """.trimIndent()
-        val obj = apiV2Mapper.decodeFromString<AdCreateRequest>(jsonString)
-        println(obj)
-//        assertEquals(null, obj.ad)
-    }
 }
