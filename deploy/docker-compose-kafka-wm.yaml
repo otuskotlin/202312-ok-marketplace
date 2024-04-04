@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    expose:
+      - "2181"
+
+  kafka:
+    image: wurstmeister/kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    volumes:
+      - ./volumes/kfdata:/kafka
+    links:
+      - zookeeper
+    healthcheck:
+      test: nc -z localhost 9092 || exit -1
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    environment:
+      # Во внутренней сети docker-compose слушаем адрес kafka:9092
+      # Из внешней сети docker-compose будем слушать localhost:9094
+      # Как альтерантива, можно вычислять адрес как-то так:
+      # HOSTNAME_COMMAND: curl http://169.254.169.254/latest/meta-data/public-hostname
+      # KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://_{HOSTNAME_COMMAND}:9094
+      KAFKA_LISTENERS: "INTERNAL://:29092,EXTERNAL://:9092"
+      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka:29092,EXTERNAL://localhost:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT"
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+  app:
+    image: ru.otus.otuskotlin.marketplace/ok-marketplace-app-kafka:0.0.1
+    depends_on:
+      - kafka
+    links:
+      - zookeeper
+      - kafka
+    environment:
+      KAFKA_HOSTS: kafka:29092
+      KAFKA_TOPIC_IN_V1: marketplace-ad-v1-in
+      KAFKA_TOPIC_OUT_V1: marketplace-ad-v1-out
+      KAFKA_TOPIC_IN_V2: marketplace-ad-v2-in
+      KAFKA_TOPIC_OUT_V2: marketplace-ad-v2-out
+
