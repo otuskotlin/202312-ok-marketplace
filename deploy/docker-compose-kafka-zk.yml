@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.8'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper
@@ -40,7 +40,6 @@ services:
       KAFKA_JMX_HOSTNAME: localhost
     ports:
       - "9092:9092"
-#      - "9091:9091"
       - "9101:9101"
 
   kafdrop:
