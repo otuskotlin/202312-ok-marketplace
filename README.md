@@ -24,9 +24,9 @@ Marketplace -- это площадка, на которой пользовате
 3. DevOps
     1. [Файлы сборки](./deploy)
 4. Архитектура
-   1. [ADR](./docs/04-architecture/01-adrs.md)
-   2. [Описание API](./docs/04-architecture/02-api.md)
-   3. [Компонентная схема](./docs/04-architecture/03-arch.md)
+    1. [ADR](./docs/04-architecture/01-adrs.md)
+    2. [Описание API](./docs/04-architecture/02-api.md)
+    3. [Компонентная схема](./docs/04-architecture/03-arch.md)
 5. Тесты
 
 # Структура проекта
@@ -51,11 +51,43 @@ Marketplace -- это площадка, на которой пользовате
 
 ## Проектные модули
 
+## Мониторинг и логирование
+
+1. [deploy](deploy) - Инструменты мониторинга и деплоя
+2. [ok-marketplace-lib-logging-common](ok-marketplace-libs/ok-marketplace-lib-logging-common) - Общие объявления для
+   логирования
+3. [ok-marketplace-lib-logging-kermit](ok-marketplace-libs/ok-marketplace-lib-logging-kermit) - Библиотека логирования
+   на базе библиотеки
+   Kermit
+4. [ok-marketplace-lib-logging-logback](ok-marketplace-libs/ok-marketplace-lib-logging-logback) - Библиотека логирования
+   на базе библиотеки Logback
+5. [ok-marketplace-lib-logging-socket](ok-marketplace-libs/ok-marketplace-lib-logging-socket) - Библиотека логирования
+   на базе TCP-сокетов
+
 ### Транспортные модели, API
 
 1. [specs](specs) - описание API в форме OpenAPI-спецификаций
 2. [ok-marketplace-api-v1-jackson](ok-marketplace-be/ok-marketplace-api-v1-jackson) - Генерация первой версии
    транспортных модеелй с Jackson
-3. [ok-marketplace-api-v2-kmp](ok-marketplace-be/ok-marketplace-api-v2-kmp) - Генерация второй версии транспортных
-   моделей с KMP
+3. [ok-marketplace-api-v1-mappers](ok-marketplace-be/ok-marketplace-api-v1-mappers) - Мапер между внутренними моделями и
+   моделями API v1
+4. [ok-marketplace-api-v2-kmp](ok-marketplace-be/ok-marketplace-api-v2-kmp) - Генерация второй версии транспортных
+   моделей с KMP, там же расположены маперы
+5. [ok-marketplace-api-log1](ok-marketplace-be/ok-marketplace-api-log1) - Генерация первой версии моделей логирования
+   вместе с маперами
+6. [ok-marketplace-common](ok-marketplace-be/ok-marketplace-common) - модуль с общими классами для модулей проекта. В
+   частности, там
+   располагаются внутренние модели и контекст.
 
+## Фреймворки и транспорты
+
+1. [ok-marketplace-app-spring](ok-marketplace-be/ok-marketplace-app-spring) - Приложение на Spring Framework
+2. [ok-marketplace-app-ktor](ok-marketplace-be/ok-marketplace-app-ktor) - Приложение на Ktor JVM/Native
+3. [ok-marketplace-app-rabbit](ok-marketplace-be/ok-marketplace-app-rabbit) - Микросервис на RabbitMQ
+4. [ok-marketplace-app-kafka](ok-marketplace-be/ok-marketplace-app-kafka) - Микросервис на Kafka
+
+## Модули бизнес-логики
+
+1. [ok-marketplace-stubs](ok-marketplace-be/ok-marketplace-stubs) - Стабы для ответов сервиса
+3. [ok-marketplace-biz](ok-marketplace-be/ok-marketplace-biz) - Модуль бизнес-логики приложения: обслуживание стабов,
+   валидация, работа с БД
