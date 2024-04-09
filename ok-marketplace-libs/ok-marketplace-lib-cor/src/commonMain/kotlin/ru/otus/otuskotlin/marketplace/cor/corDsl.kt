@@ -2,7 +2,6 @@ package ru.otus.otuskotlin.marketplace.cor
 
 import ru.otus.otuskotlin.marketplace.cor.handlers.CorChainDsl
 import ru.otus.otuskotlin.marketplace.cor.handlers.CorWorkerDsl
-import ru.otus.otuskotlin.marketplace.cor.handlers.executeParallel
 
 /**
  * Базовый билдер (dsl)
@@ -39,7 +38,7 @@ interface ICorWorkerDsl<T> : ICorExecDsl<T> {
  *
  * Пример:
  * ```
- *  chain<SomeContext> {
+ *  rootChain<SomeContext> {
  *      worker {
  *      }
  *      chain {
@@ -47,9 +46,6 @@ interface ICorWorkerDsl<T> : ICorExecDsl<T> {
  *          }
  *          worker(...) {
  *          }
- *      }
- *      parallel {
- *         ...
  *      }
  *  }
  * ```
@@ -62,14 +58,6 @@ fun <T> rootChain(function: ICorChainDsl<T>.() -> Unit): ICorChainDsl<T> = CorCh
  */
 fun <T> ICorChainDsl<T>.chain(function: ICorChainDsl<T>.() -> Unit) {
     add(CorChainDsl<T>().apply(function))
-}
-
-/**
- * Создает цепочку, элементы которой исполняются параллельно. Будьте аккуратны с доступом к контексту -
- * при необходимости используйте синхронизацию
- */
-fun <T> ICorChainDsl<T>.parallel(function: ICorChainDsl<T>.() -> Unit) {
-    add(CorChainDsl<T>(::executeParallel).apply(function))
 }
 
 /**

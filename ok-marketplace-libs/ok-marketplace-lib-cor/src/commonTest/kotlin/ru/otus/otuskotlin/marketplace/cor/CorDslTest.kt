@@ -1,7 +1,6 @@
 package ru.otus.otuskotlin.marketplace.cor
 
 import kotlinx.coroutines.test.runTest
-import kotlin.js.JsName
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
@@ -14,7 +13,6 @@ class CorBaseTest {
     }
 
     @Test
-    @JsName("handle_should_execute")
     fun `handle should execute`() = runTest {
         val chain = rootChain<TestContext> {
             worker {
@@ -26,7 +24,6 @@ class CorBaseTest {
     }
 
     @Test
-    @JsName("on_should_check_condition")
     fun `on should check condition`() = runTest {
         val chain = rootChain<TestContext> {
             worker {
@@ -49,7 +46,6 @@ class CorBaseTest {
     }
 
     @Test
-    @JsName("except_should_execute_when_exception")
     fun `except should execute when exception`() = runTest {
         val chain = rootChain<TestContext> {
             worker {
@@ -61,7 +57,6 @@ class CorBaseTest {
     }
 
     @Test
-    @JsName("should_throw_when_exception_and_no_except")
     fun `should throw when exception and no except`() = runTest {
         val chain = rootChain<TestContext> {
             worker("throw") { throw RuntimeException("some error") }
@@ -72,7 +67,6 @@ class CorBaseTest {
     }
 
     @Test
-    @JsName("complex_chain_example")
     fun `complex chain example`() = runTest {
         val chain = rootChain<TestContext> {
             worker {
@@ -92,16 +86,6 @@ class CorBaseTest {
                     description = "Пример использования обработчика в виде лямбды"
                 ) {
                     some += 4
-                }
-            }
-
-            parallel {
-                on {
-                    some < 15
-                }
-
-                worker(title = "Increment some") {
-                    some++
                 }
             }
 
