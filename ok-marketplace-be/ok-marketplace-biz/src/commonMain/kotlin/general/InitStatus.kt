@@ -7,6 +7,9 @@ import ru.otus.otuskotlin.marketplace.common.models.MkplState
 
 fun ICorChainDsl<MkplContext>.initStatus(title: String) = worker() {
     this.title = title
+    this.description = """
+        Этот обработчик устанавливает стартовый статус обработки. Запускается только в случае не заданного статуса.
+    """.trimIndent()
     on { state == MkplState.NONE }
     handle { state = MkplState.RUNNING }
 }

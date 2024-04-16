@@ -10,6 +10,10 @@ import ru.otus.otuskotlin.marketplace.common.stubs.MkplStubs
 
 fun ICorChainDsl<MkplContext>.stubValidationBadTitle(title: String) = worker {
     this.title = title
+    this.description = """
+        Кейс ошибки валидации для заголовка
+    """.trimIndent()
+
     on { stubCase == MkplStubs.BAD_TITLE && state == MkplState.RUNNING }
     handle {
         fail(

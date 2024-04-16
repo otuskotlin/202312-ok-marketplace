@@ -16,9 +16,9 @@ fun Throwable.asMkplError(
     exception = this,
 )
 
-fun MkplContext.addError(vararg error: MkplError) = errors.addAll(error)
+inline fun MkplContext.addError(vararg error: MkplError) = errors.addAll(error)
 
-fun MkplContext.fail(error: MkplError) {
+inline fun MkplContext.fail(error: MkplError) {
     addError(error)
     state = MkplState.FAILING
 }

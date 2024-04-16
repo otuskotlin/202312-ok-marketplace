@@ -11,6 +11,9 @@ import ru.otus.otuskotlin.marketplace.stubs.MkplAdStub
 
 fun ICorChainDsl<MkplContext>.stubOffersSuccess(title: String, corSettings: MkplCorSettings) = worker {
     this.title = title
+    this.description = """
+        Кейс успеха для получения предложений для объявления
+    """.trimIndent()
     on { stubCase == MkplStubs.SUCCESS && state == MkplState.RUNNING }
     val logger = corSettings.loggerProvider.logger("stubOffersSuccess")
     handle {

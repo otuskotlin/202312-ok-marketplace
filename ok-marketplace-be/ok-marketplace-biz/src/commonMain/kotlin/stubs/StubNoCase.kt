@@ -9,6 +9,9 @@ import ru.otus.otuskotlin.marketplace.common.models.MkplState
 
 fun ICorChainDsl<MkplContext>.stubNoCase(title: String) = worker {
     this.title = title
+    this.description = """
+        Валидируем ситуацию, когда запрошен кейс, который не поддерживается в стабах
+    """.trimIndent()
     on { state == MkplState.RUNNING }
     handle {
         fail(
