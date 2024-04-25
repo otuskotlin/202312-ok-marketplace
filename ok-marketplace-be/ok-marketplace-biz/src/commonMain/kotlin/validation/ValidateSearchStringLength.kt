@@ -33,7 +33,7 @@ fun ICorChainDsl<MkplContext>.validateSearchStringLength(title: String) = chain 
         }
     }
     worker {
-        this.title = "Проверка кейса длины на 0-2 символа"
+        this.title = "Проверка кейса длины на более 100 символов"
         this.description = this.title
         on { state == MkplState.RUNNING && adFilterValidating.searchString.length > 100 }
         handle {

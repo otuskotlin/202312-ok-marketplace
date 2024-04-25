@@ -28,5 +28,4 @@ data class MkplContext(
 
     var adResponse: MkplAd = MkplAd(),
     var adsResponse: MutableList<MkplAd> = mutableListOf(),
-
-    )
+)

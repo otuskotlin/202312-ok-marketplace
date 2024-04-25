@@ -8,6 +8,10 @@ import ru.otus.otuskotlin.marketplace.common.helpers.fail
 
 fun ICorChainDsl<MkplContext>.validateTitleHasContent(title: String) = worker {
     this.title = title
+    this.description = """
+        Проверяем, что у нас есть какие-то слова в заголовке.
+        Отказываем в публикации заголовков, в которых только бессмысленные символы типа %^&^$^%#^))&^*&%^^&
+    """.trimIndent()
     val regExp = Regex("\\p{L}")
     on { adValidating.title.isNotEmpty() && ! adValidating.title.contains(regExp) }
     handle {
@@ -15,7 +19,7 @@ fun ICorChainDsl<MkplContext>.validateTitleHasContent(title: String) = worker {
             errorValidation(
             field = "title",
             violationCode = "noContent",
-            description = "field must contain leters"
+            description = "field must contain letters"
         )
         )
     }

@@ -13,10 +13,10 @@ fun ICorChainDsl<MkplContext>.validateTitleNotEmpty(title: String) = worker {
     handle {
         fail(
             errorValidation(
-            field = "title",
-            violationCode = "empty",
-            description = "field must not be empty"
-        )
+                field = "title",
+                violationCode = "empty",
+                description = "field must not be empty"
+            )
         )
     }
 }
