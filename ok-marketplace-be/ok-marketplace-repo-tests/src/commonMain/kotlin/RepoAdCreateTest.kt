@@ -3,12 +3,15 @@ package ru.otus.otuskotlin.marketplace.backend.repo.tests
 import ru.otus.otuskotlin.marketplace.common.models.*
 import ru.otus.otuskotlin.marketplace.common.repo.DbAdRequest
 import ru.otus.otuskotlin.marketplace.common.repo.DbAdResponseOk
-import ru.otus.otuskotlin.marketplace.repo.common.IRepoAdInitializable
-import kotlin.test.*
+import ru.otus.otuskotlin.marketplace.common.repo.IRepoAd
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertIs
+import kotlin.test.assertNotEquals
 
 
 abstract class RepoAdCreateTest {
-    abstract val repo: IRepoAdInitializable
+    abstract val repo: IRepoAd
     protected open val lockNew: MkplAdLock = MkplAdLock("20000000-0000-0000-0000-000000000002")
 
     private val createObj = MkplAd(
