@@ -1,6 +1,8 @@
 package ru.otus.otuskotlin.marketplace.app.ktor.repo
 
 import com.benasher44.uuid.uuid4
+import org.junit.AfterClass
+import org.junit.BeforeClass
 import org.testcontainers.containers.CassandraContainer
 import ru.otus.otuskotlin.marketplace.api.v1.models.AdRequestDebugMode
 import ru.otus.otuskotlin.marketplace.app.ktor.MkplAppSettings
@@ -57,7 +59,18 @@ class V1AdRepoCassandraTest : V1AdRepoBaseTest() {
         private val container by lazy {
             @Suppress("Since15")
             TestCasandraContainer().withStartupTimeout(Duration.ofSeconds(300L))
-                .also { it.start() }
+        }
+
+        @JvmStatic
+        @BeforeClass
+        fun tearUp() {
+            container.start()
+        }
+
+        @JvmStatic
+        @AfterClass
+        fun tearDown() {
+            container.stop()
         }
 
         fun repository(keyspace: String, uuid: String? = null): RepoAdCassandra {
