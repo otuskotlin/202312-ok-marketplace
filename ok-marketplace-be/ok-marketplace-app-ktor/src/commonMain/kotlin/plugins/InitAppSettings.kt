@@ -5,6 +5,7 @@ import ru.otus.otuskotlin.marketplace.app.ktor.MkplAppSettings
 import ru.otus.otuskotlin.marketplace.app.ktor.base.KtorWsSessionRepo
 import ru.otus.otuskotlin.marketplace.backend.repository.inmemory.AdRepoStub
 import ru.otus.otuskotlin.marketplace.biz.MkplAdProcessor
+import ru.otus.otuskotlin.marketplace.biz.statemachine.SMAdStateResolverDefault
 import ru.otus.otuskotlin.marketplace.common.MkplCorSettings
 
 fun Application.initAppSettings(): MkplAppSettings {
@@ -14,6 +15,7 @@ fun Application.initAppSettings(): MkplAppSettings {
         repoTest = getDatabaseConf(AdDbType.TEST),
         repoProd = getDatabaseConf(AdDbType.PROD),
         repoStub = AdRepoStub(),
+        stateMachine = SMAdStateResolverDefault(),
     )
     return MkplAppSettings(
         appUrls = environment.config.propertyOrNull("ktor.urls")?.getList() ?: emptyList(),

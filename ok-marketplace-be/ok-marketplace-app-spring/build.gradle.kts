@@ -42,6 +42,8 @@ dependencies {
     testImplementation(projects.okMarketplaceRepoCommon)
     testImplementation(projects.okMarketplaceStubs)
 
+    implementation(projects.okMarketplaceBizState)
+
     // tests
     testImplementation(kotlin("test-junit5"))
     testImplementation(libs.spring.test)

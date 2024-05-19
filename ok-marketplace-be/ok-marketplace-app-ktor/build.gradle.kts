@@ -81,6 +81,8 @@ kotlin {
                 implementation(projects.okMarketplaceRepoInmemory)
                 implementation(projects.okMarketplaceRepoPostgres)
 
+                implementation(projects.okMarketplaceBizState)
+
                 // logging
                 implementation(project(":ok-marketplace-api-log1"))
                 implementation("ru.otus.otuskotlin.marketplace.libs:ok-marketplace-lib-logging-common")

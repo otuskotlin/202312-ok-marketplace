@@ -1,5 +1,9 @@
 package ru.otus.otuskotlin.marketplace.common.models
 
+import kotlinx.datetime.Instant
+import ru.otus.otuskotlin.marketplace.common.NONE
+import ru.otus.otuskotlin.marketplace.common.statemachine.SMAdStates
+
 data class MkplAd(
     var id: MkplAdId = MkplAdId.NONE,
     var title: String = "",
@@ -9,7 +13,12 @@ data class MkplAd(
     var visibility: MkplVisibility = MkplVisibility.NONE,
     var productId: MkplProductId = MkplProductId.NONE,
     var lock: MkplAdLock = MkplAdLock.NONE,
-    val permissionsClient: MutableSet<MkplAdPermissionClient> = mutableSetOf()
+    val permissionsClient: MutableSet<MkplAdPermissionClient> = mutableSetOf(),
+
+    var adState: SMAdStates = SMAdStates.NONE,
+    var views: Int = 0,
+    var timePublished: Instant = Instant.NONE,
+    var timeUpdated: Instant = Instant.NONE,
 ) {
     fun deepCopy(): MkplAd = copy(
         permissionsClient = permissionsClient.toMutableSet(),
