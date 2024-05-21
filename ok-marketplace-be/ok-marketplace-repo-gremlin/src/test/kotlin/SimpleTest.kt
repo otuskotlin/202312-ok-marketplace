@@ -88,8 +88,8 @@ class SimpleTest {
             .authProperties(authProp)
             .create()
         traversal()
-            //                                     Этот граф должен быть указан в /home/arcadedb/config/gremblin-server.groovy
-            .withRemote(DriverRemoteConnection.using(cluster, "graph"))
+            //               Этот граф должен быть указан в /home/arcadedb/config/gremblin-server.groovy
+            .withRemote(DriverRemoteConnection.using(cluster, dbName))
             .use { g ->
                 val userId = g
                     .addV("User")
@@ -171,7 +171,7 @@ class SimpleTest {
                 .V(id)
                 .`as`("a")
                 .choose(
-                    bs.select<Vertex, Any>("a")
+                    bs.select<Vertex, Vertex>("a")
                         .values<String>("lock")
                         .`is`("1112"),
                     bs.select<Vertex, String>("a").drop().inject("success"),
