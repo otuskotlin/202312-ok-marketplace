@@ -4,7 +4,6 @@ import ru.otus.otuskotlin.marketplace.biz.statemachine.general.initRepo
 import ru.otus.otuskotlin.marketplace.biz.statemachine.general.prepareResponse
 import ru.otus.otuskotlin.marketplace.biz.statemachine.general.readStateFromDb
 import ru.otus.otuskotlin.marketplace.biz.statemachine.helper.initStatus
-import ru.otus.otuskotlin.marketplace.biz.statemachine.helper.operation
 import ru.otus.otuskotlin.marketplace.biz.statemachine.stubs.stubNoCase
 import ru.otus.otuskotlin.marketplace.biz.statemachine.stubs.stubs
 import ru.otus.otuskotlin.marketplace.biz.statemachine.validation.finishValidation
@@ -16,7 +15,6 @@ import ru.otus.otuskotlin.marketplace.cor.worker
 import ru.otus.otuskotlin.marketplace.states.common.MkplStateContext
 import ru.otus.otuskotlin.marketplace.states.common.MkplStatesCorSettings
 import ru.otus.otuskotlin.marketplace.states.common.models.MkplAdStateId
-import ru.otus.otuskotlin.marketplace.states.common.models.MkplStateCommand
 
 class MkplAdStateProcessor(
     private val corSettings: MkplStatesCorSettings = MkplStatesCorSettings.NONE

@@ -21,6 +21,7 @@ class MkplUpdateStateProcessor(
         readAllStatesWithLock("Чтение и блокировка всех объектов в БД на время вычисления")
         requestStatisticsServer("Запрос сервера статистики")
         computeAdState("Вычисление обновленного состояния")
+//        filterUpdated("Вычисляет объявления для сохранения")
         updateStatesWithLock("Чтение и блокировка всех объектов в БД на время вычисления")
     }.build()
 }
@@ -29,7 +30,7 @@ private fun ICorChainDsl<MkplAllStatesContext>.readAllStatesWithLock(title: Stri
     this.title = title
     this.description = """
         Запрашиваем все объекы из БД
-        Проверяем блокировку
+        Проверяем блокировку и время последнего обновления
         - Если блокировка не установлена, ставим свою
         - Если блокировка установлена давно, переписываем на свою
         - Иначе пропускаем, она захвачена другим процессом

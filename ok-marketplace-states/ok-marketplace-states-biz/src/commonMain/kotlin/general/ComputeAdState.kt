@@ -19,9 +19,9 @@ fun ICorChainDsl<MkplAllStatesContext>.computeAdState(title: String) = worker {
     this.description = "Вычисление состояния объявления"
     on { state == MkplState.RUNNING }
     handle {
+        val machine = this.corSettings.stateMachine
+        val log = corSettings.loggerProvider.logger(clazz)
         statesComputed = statesWStat.onEach { sc: MkplStateRq ->
-            val machine = this.corSettings.stateMachine
-            val log = corSettings.loggerProvider.logger(clazz)
             val timeNow = Clock.System.now()
             val timePublished = sc.created.takeIf { it != Instant.NONE } ?: timeNow
             val signal = SMAdSignal(
