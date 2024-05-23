@@ -17,8 +17,8 @@ data class MkplStateContext(
     var rqValidating: MkplStateRq = MkplStateRq(),
     var rqValidated: MkplStateRq = MkplStateRq(),
 
-    var stateRead: MkplAdStateObj = MkplAdStateObj(),
-    var stateWStats: MkplAdStateObj = MkplAdStateObj(),
+    var stateRead: MkplStateRq = MkplStateRq(),
+    var stateWStats: MkplStateRq = MkplStateRq(),
 
     var stateResponse: MkplStateRq = MkplStateRq(),
 ): IMkplStateContext
