@@ -1,9 +1,9 @@
-package ru.otus.otuskotlin.marketplace.biz.statemachine
+package ru.otus.otuskotlin.marketplace.biz.statemachine.resolver
 
-import ru.otus.otuskotlin.marketplace.common.statemachine.ISMAdStateResolver
-import ru.otus.otuskotlin.marketplace.common.statemachine.SMAdSignal
-import ru.otus.otuskotlin.marketplace.common.statemachine.SMAdStates
-import ru.otus.otuskotlin.marketplace.common.statemachine.SMTransition
+import ru.otus.otuskotlin.marketplace.states.common.statemachine.ISMAdStateResolver
+import ru.otus.otuskotlin.marketplace.states.common.statemachine.SMAdSignal
+import ru.otus.otuskotlin.marketplace.states.common.statemachine.SMAdStates
+import ru.otus.otuskotlin.marketplace.states.common.statemachine.SMTransition
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.milliseconds

@@ -1,7 +1,8 @@
 package ru.otus.otuskotlin.marketplace.biz.statemachine
 
-import ru.otus.otuskotlin.marketplace.common.statemachine.SMAdSignal
-import ru.otus.otuskotlin.marketplace.common.statemachine.SMAdStates
+import ru.otus.otuskotlin.marketplace.biz.statemachine.resolver.SMAdStateResolverDefault
+import ru.otus.otuskotlin.marketplace.states.common.statemachine.SMAdSignal
+import ru.otus.otuskotlin.marketplace.states.common.statemachine.SMAdStates
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertEquals

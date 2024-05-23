@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.marketplace.common.statemachine
+package ru.otus.otuskotlin.marketplace.states.common.statemachine
 
 interface ISMAdStateResolver {
     fun resolve(signal: SMAdSignal): SMTransition

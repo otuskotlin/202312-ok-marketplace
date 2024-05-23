@@ -1,7 +1,6 @@
 package ru.otus.otuskotlin.marketplace.common
 
 import ru.otus.otuskotlin.marketplace.common.repo.IRepoAd
-import ru.otus.otuskotlin.marketplace.common.statemachine.ISMAdStateResolver
 import ru.otus.otuskotlin.marketplace.common.ws.IMkplWsSessionRepo
 import ru.otus.otuskotlin.marketplace.logging.common.MpLoggerProvider
 
@@ -11,7 +10,6 @@ data class MkplCorSettings(
     val repoStub: IRepoAd = IRepoAd.NONE,
     val repoTest: IRepoAd = IRepoAd.NONE,
     val repoProd: IRepoAd = IRepoAd.NONE,
-    val stateMachine: ISMAdStateResolver = ISMAdStateResolver.NONE
 ) {
     companion object {
         val NONE = MkplCorSettings()

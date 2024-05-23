@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.marketplace.common.statemachine
+package ru.otus.otuskotlin.marketplace.states.common.statemachine
 
 import kotlin.time.Duration
 

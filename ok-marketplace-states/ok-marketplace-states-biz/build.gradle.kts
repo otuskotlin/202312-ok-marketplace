@@ -12,7 +12,7 @@ kotlin {
 
                 implementation(libs.cor)
 
-                implementation(project(":ok-marketplace-common"))
+                implementation(projects.okMarketplaceStatesCommon)
             }
         }
         commonTest {
