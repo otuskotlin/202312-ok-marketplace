@@ -5,6 +5,7 @@ import ru.otus.otuskotlin.marketplace.biz.statemachine.general.prepareResponse
 import ru.otus.otuskotlin.marketplace.biz.statemachine.general.readStateFromDb
 import ru.otus.otuskotlin.marketplace.biz.statemachine.helper.initStatus
 import ru.otus.otuskotlin.marketplace.biz.statemachine.stubs.stubNoCase
+import ru.otus.otuskotlin.marketplace.biz.statemachine.stubs.stubSuccess
 import ru.otus.otuskotlin.marketplace.biz.statemachine.stubs.stubs
 import ru.otus.otuskotlin.marketplace.biz.statemachine.validation.finishValidation
 import ru.otus.otuskotlin.marketplace.biz.statemachine.validation.validateIdNotEmpty
@@ -26,6 +27,7 @@ class MkplAdStateProcessor(
         initRepo("Инициализация репозитория")
 
         stubs("Обработка стабов") {
+            stubSuccess("Успешный сценарий")
             stubNoCase("Ошибка: запрошенный стаб недопустим")
         }
         validation {
@@ -40,4 +42,3 @@ class MkplAdStateProcessor(
         prepareResponse("Подготовка ответа")
     }.build()
 }
-

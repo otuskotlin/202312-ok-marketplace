@@ -35,7 +35,6 @@ include(":ok-marketplace-api-log1")
 
 include(":ok-marketplace-common")
 include(":ok-marketplace-biz")
-include(":ok-marketplace-biz-state")
 include(":ok-marketplace-stubs")
 
 include(":ok-marketplace-app-common")

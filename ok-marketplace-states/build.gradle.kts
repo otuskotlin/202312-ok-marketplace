@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.muschko.java) apply false
 }
 
-group = "ru.otus.otuskotlin.marketplace"
+group = "ru.otus.otuskotlin.marketplace.state"
 version = "0.0.1"
 
 allprojects {

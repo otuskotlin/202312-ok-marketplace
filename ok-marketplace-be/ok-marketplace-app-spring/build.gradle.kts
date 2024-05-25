@@ -23,7 +23,7 @@ dependencies {
     // Внутренние модели
     implementation(project(":ok-marketplace-common"))
     implementation(project(":ok-marketplace-app-common"))
-    implementation("ru.otus.otuskotlin.marketplace.libs:ok-marketplace-lib-logging-logback")
+    implementation(libs.mkpl.logs.logback)
 
     // v1 api
     implementation(project(":ok-marketplace-api-v1-jackson"))
@@ -42,7 +42,9 @@ dependencies {
     testImplementation(projects.okMarketplaceRepoCommon)
     testImplementation(projects.okMarketplaceStubs)
 
-    implementation(projects.okMarketplaceBizState)
+    // State
+    implementation(libs.mkpl.state.common)
+    implementation(libs.mkpl.state.biz)
 
     // tests
     testImplementation(kotlin("test-junit5"))

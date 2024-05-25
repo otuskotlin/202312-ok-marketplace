@@ -10,7 +10,6 @@ import ru.otus.otuskotlin.markeplace.app.spring.base.SpringWsSessionRepo
 import ru.otus.otuskotlin.marketplace.backend.repo.postgresql.RepoAdSql
 import ru.otus.otuskotlin.marketplace.backend.repository.inmemory.AdRepoStub
 import ru.otus.otuskotlin.marketplace.biz.MkplAdProcessor
-import ru.otus.otuskotlin.marketplace.biz.statemachine.SMAdStateResolverDefault
 import ru.otus.otuskotlin.marketplace.common.MkplCorSettings
 import ru.otus.otuskotlin.marketplace.common.repo.IRepoAd
 import ru.otus.otuskotlin.marketplace.logging.common.MpLoggerProvider
@@ -48,7 +47,6 @@ class AdConfig(val postgresConfig: AdConfigPostgres) {
         repoTest = testRepo(),
         repoProd = prodRepo(),
         repoStub = stubRepo(),
-        stateMachine = SMAdStateResolverDefault()
     )
 
     @Bean

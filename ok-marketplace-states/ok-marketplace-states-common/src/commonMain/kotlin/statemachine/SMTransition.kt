@@ -6,5 +6,6 @@ data class SMTransition(
 ) {
     companion object {
         val ERROR = SMTransition(SMAdStates.ERROR, "Unprovided transition occurred")
+        val NONE = SMTransition(SMAdStates.NONE, "Empty Transition")
     }
 }
