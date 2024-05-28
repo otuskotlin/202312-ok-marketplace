@@ -38,6 +38,7 @@ class MkplAdProcessor(
                 stubDbError("Имитация ошибки работы с БД")
                 stubNoCase("Ошибка: запрошенный стаб недопустим")
             }
+            chainPermissions("Вычисление разрешений для пользователя")
             validation {
                 worker("Копируем поля в adValidating") { adValidating = adRequest.deepCopy() }
                 worker("Очистка id") { adValidating.id = MkplAdId.NONE }
@@ -50,7 +51,6 @@ class MkplAdProcessor(
 
                 finishAdValidation("Завершение проверок")
             }
-            chainPermissions("Вычисление разрешений для пользователя")
             chain {
                 title = "Логика сохранения"
                 repoPrepareCreate("Подготовка объекта для сохранения")
@@ -68,6 +68,7 @@ class MkplAdProcessor(
                 stubDbError("Имитация ошибки работы с БД")
                 stubNoCase("Ошибка: запрошенный стаб недопустим")
             }
+            chainPermissions("Вычисление разрешений для пользователя")
             validation {
                 worker("Копируем поля в adValidating") { adValidating = adRequest.deepCopy() }
                 worker("Очистка id") { adValidating.id = MkplAdId(adValidating.id.asString().trim()) }
@@ -76,7 +77,6 @@ class MkplAdProcessor(
 
                 finishAdValidation("Успешное завершение процедуры валидации")
             }
-            chainPermissions("Вычисление разрешений для пользователя")
             chain {
                 title = "Логика чтения"
                 repoRead("Чтение объявления из БД")
@@ -100,6 +100,7 @@ class MkplAdProcessor(
                 stubDbError("Имитация ошибки работы с БД")
                 stubNoCase("Ошибка: запрошенный стаб недопустим")
             }
+            chainPermissions("Вычисление разрешений для пользователя")
             validation {
                 worker("Копируем поля в adValidating") { adValidating = adRequest.deepCopy() }
                 worker("Очистка id") { adValidating.id = MkplAdId(adValidating.id.asString().trim()) }
@@ -117,7 +118,6 @@ class MkplAdProcessor(
 
                 finishAdValidation("Успешное завершение процедуры валидации")
             }
-            chainPermissions("Вычисление разрешений для пользователя")
             chain {
                 title = "Логика сохранения"
                 repoRead("Чтение объявления из БД")
@@ -137,6 +137,7 @@ class MkplAdProcessor(
                 stubDbError("Имитация ошибки работы с БД")
                 stubNoCase("Ошибка: запрошенный стаб недопустим")
             }
+            chainPermissions("Вычисление разрешений для пользователя")
             validation {
                 worker("Копируем поля в adValidating") {
                     adValidating = adRequest.deepCopy()
@@ -149,7 +150,6 @@ class MkplAdProcessor(
                 validateLockProperFormat("Проверка формата lock")
                 finishAdValidation("Успешное завершение процедуры валидации")
             }
-            chainPermissions("Вычисление разрешений для пользователя")
             chain {
                 title = "Логика удаления"
                 repoRead("Чтение объявления из БД")
@@ -169,13 +169,13 @@ class MkplAdProcessor(
                 stubDbError("Имитация ошибки работы с БД")
                 stubNoCase("Ошибка: запрошенный стаб недопустим")
             }
+            chainPermissions("Вычисление разрешений для пользователя")
             validation {
                 worker("Копируем поля в adFilterValidating") { adFilterValidating = adFilterRequest.deepCopy() }
                 validateSearchStringLength("Валидация длины строки поиска в фильтре")
 
                 finishAdFilterValidation("Успешное завершение процедуры валидации")
             }
-            chainPermissions("Вычисление разрешений для пользователя")
             searchTypes("Подготовка поискового запроса")
 
             repoSearch("Поиск объявления в БД по фильтру")
@@ -190,6 +190,7 @@ class MkplAdProcessor(
                 stubDbError("Имитация ошибки работы с БД")
                 stubNoCase("Ошибка: запрошенный стаб недопустим")
             }
+            chainPermissions("Вычисление разрешений для пользователя")
             validation {
                 worker("Копируем поля в adValidating") { adValidating = adRequest.deepCopy() }
                 worker("Очистка id") { adValidating.id = MkplAdId(adValidating.id.asString().trim()) }
@@ -198,7 +199,6 @@ class MkplAdProcessor(
 
                 finishAdValidation("Успешное завершение процедуры валидации")
             }
-            chainPermissions("Вычисление разрешений для пользователя")
             chain {
                 title = "Логика поиска в БД"
                 repoRead("Чтение объявления из БД")

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#KCHOST=http://localhost:8081
-KCHOST=http://localhost:32782
+KCHOST=http://localhost:8081
+#KCHOST=http://localhost:32782
 REALM=otus-marketplace
 CLIENT_ID=otus-marketplace-service
 UNAME=otus-test

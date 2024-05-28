@@ -17,8 +17,8 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.4
-    ports:
-      - "8081:8080"
+#    ports:
+#      - "8081:8080"
     volumes:
       #      - ./keycloak:/tmp
       - ./volumes/keycloak/import:/opt/keycloak/data/import
