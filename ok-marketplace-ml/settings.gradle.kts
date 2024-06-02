@@ -1,4 +1,4 @@
-rootProject.name = "ok-marketplace-states"
+rootProject.name = "ok-marketplace-ml"
 
 dependencyResolutionManagement {
     versionCatalogs {
@@ -27,6 +27,3 @@ plugins {
 // Включает вот такую конструкцию
 //implementation(projects.m2l5Gradle.sub1.ssub1)
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-include(":ok-marketplace-states-common")
-include(":ok-marketplace-states-biz")

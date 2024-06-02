@@ -1,18 +1,14 @@
 plugins {
-    kotlin("jvm") version "1.9.21"
+    id("build-jvm")
 }
 
-group = "ru.otus.otuskotlin.ml"
-version = "0.0."
-
-repositories {
-    mavenCentral()
-}
+group = "ru.otus.otuskotlin.marketplace.ml"
+version = "0.0.1"
 
 dependencies {
-    implementation("com.microsoft.onnxruntime:onnxruntime:1.16.3")
-    implementation("ai.djl.huggingface:tokenizers:0.25.0")
-    implementation("org.slf4j:slf4j-api:2.0.9")
+    implementation(libs.ml.onnx.runtime)
+    implementation(libs.ml.tokenizer)
+    implementation(libs.logback)
 
     testImplementation(kotlin("test-junit5"))
 }
@@ -23,11 +19,8 @@ tasks {
     }
 }
 
-kotlin {
-    javaToolchains {
-        javadocToolFor {
-            languageVersion.set(JavaLanguageVersion.of(17))
-        }
-
+allprojects {
+    repositories {
+        mavenCentral()
     }
 }
